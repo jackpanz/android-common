@@ -3,9 +3,11 @@ package com.github.jackpanz.android.common;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.preference.PreferenceActivity;
 import android.util.Log;
 
 import com.akexorcist.localizationactivity.core.LanguageSetting;
+import com.akexorcist.localizationactivity.core.LocalizationActivityDelegate;
 
 import java.util.Locale;
 
@@ -70,6 +72,35 @@ public class LocalizationUtils {
 
     public static boolean isEN() {
         return isEN(getLanguage());
+    }
+
+    public static void isPT(LocalizationRunnable localizationRunnable) {
+        if(isPT(getLanguage())){
+            localizationRunnable.run();
+        }
+    }
+
+    public static void isCN(LocalizationRunnable localizationRunnable) {
+        if(isCN(getLanguage())){
+            localizationRunnable.run();
+        }
+    }
+
+    public static void isTW(LocalizationRunnable localizationRunnable) {
+        if(isTW(getLanguage())){
+            localizationRunnable.run();
+        }
+    }
+
+    public static void isEN(LocalizationRunnable localizationRunnable) {
+        if(isEN(getLanguage())){
+            localizationRunnable.run();
+        }
+    }
+
+    @FunctionalInterface
+    public interface LocalizationRunnable {
+        void run();
     }
 
 
