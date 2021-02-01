@@ -3,11 +3,9 @@ package com.github.jackpanz.android.common;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.preference.PreferenceActivity;
 import android.util.Log;
 
 import com.akexorcist.localizationactivity.core.LanguageSetting;
-import com.akexorcist.localizationactivity.core.LocalizationActivityDelegate;
 
 import java.util.Locale;
 
