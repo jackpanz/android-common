@@ -31,6 +31,8 @@ android {
 
 dependencies {
 
+    compileOnly 'androidx.fragment:fragment:1.2.4'
+    compileOnly 'androidx.appcompat:appcompat:1.2.0'
     compileOnly group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.8.1'
     compileOnly 'com.akexorcist:localization:1.2.6'
 
