@@ -114,6 +114,10 @@ public class LocalizationUtils {
         return get(en, zh_TW, null, pt);
     }
 
+    public static <T> T ep(T en, T pt) {
+        return get(en, null, null, pt);
+    }
+
     public static <T> T tc(T en, T zh_TW) {
         return get(en, zh_TW, null, null);
     }
