@@ -189,8 +189,8 @@ public class LocalizationUtils {
     public static Locale getAppDefaultLocale(Context context) {
         try {
             Locale locale = getSystemDefaultLocale(context);
-            Log.d(TAG, "Country:" + locale.getCountry());
-            Log.d(TAG, "Language:" + locale.getLanguage());
+            Log.d(TAG, "Device Country:" + locale.getCountry());
+            Log.d(TAG, "Device Language:" + locale.getLanguage());
             if ( ( IS_HAVE_ZH_CN || IS_HAVE_ZH_TW ) && "zh".equals(locale.getLanguage()) ) {
                 if( IS_HAVE_ZH_CN && "Hans".equals(locale.getScript())){
                     return Locale.SIMPLIFIED_CHINESE;
@@ -204,7 +204,9 @@ public class LocalizationUtils {
             } else if ( IS_HAVE_EN && "en".equals(locale.getLanguage())) {
                 return Locale.ENGLISH;
             }
-        } catch (Exception ex) { ex.printStackTrace(); }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return DEFAULT_LOCALE;
     }
 
