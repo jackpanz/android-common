@@ -18,11 +18,11 @@ public class OkHttpUtils {
 
     final static private String TAG = OkHttpUtils.class.getSimpleName();
 
-    static OkHttpUtils netUtil = null;
+    public static OkHttpUtils netUtil = null;
 
     public OkHttpClient sOkHttpClient;
 
-    boolean debug = false;
+    public static boolean debug = false;
 
     private OkHttpUtils() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
