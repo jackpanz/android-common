@@ -3,7 +3,6 @@ package com.github.jackpanz.android;
 import android.os.Bundle;
 import com.github.jackpanz.android.common.activity.LocalizationBasicActivity;
 import com.github.jackpanz.android.common.dialog.LoadingDialog;
-import com.github.jackpanz.android.common.dialog.ProgressDialog;
 import com.github.jackpanz.android.common.net.ThreadUtils;
 import com.github.jackpanz.android.common.test.R;
 
