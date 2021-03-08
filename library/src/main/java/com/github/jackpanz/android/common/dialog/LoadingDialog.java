@@ -13,6 +13,20 @@ import com.github.jackpanz.android.common.R;
  */
 public class LoadingDialog extends Dialog{
 
+    public TextView messageText = null;
+
+    public TextView getMessageText() {
+        return messageText;
+    }
+
+    public void setMessageText(TextView messageText) {
+        this.messageText = messageText;
+    }
+
+    public void setMessage(String message){
+        this.messageText.setText(message);
+    }
+
 
     public LoadingDialog(Context context) {
         super(context);
@@ -89,6 +103,7 @@ public class LoadingDialog extends Dialog{
             msgText.setVisibility(isShowMessage?View.VISIBLE:View.GONE);
 
             LoadingDialog loadingDailog = new LoadingDialog(context,R.style.MyDialogStyle);
+            loadingDailog.setMessageText(msgText);
             loadingDailog.setContentView(view);
             loadingDailog.setCancelable(isCancelable);
             loadingDailog.setCanceledOnTouchOutside(isCancelOutside);
