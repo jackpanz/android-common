@@ -24,7 +24,7 @@ public class SingleThreadUtils {
 
     public static void executeUI(SimpleCallback callback, NetRunnable... myRunnable) {
         // new Runnable(){
-        new MultipleNetwork(callback, myRunnable).run();
+        new SingleNetwork(callback, myRunnable).run();
     }
 
     public static void delayUI(Activity activity, int delay, Runnable runnable) {
