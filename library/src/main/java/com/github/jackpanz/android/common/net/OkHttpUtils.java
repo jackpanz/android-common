@@ -18,17 +18,17 @@ public class OkHttpUtils {
 
     final static private String TAG = OkHttpUtils.class.getSimpleName();
 
-    public static OkHttpUtils netUtil = null;
+    public static OkHttpUtils okHttpUtils = null;
 
-    public OkHttpClient sOkHttpClient;
+    public OkHttpClient okHttpClient;
 
     public static boolean debug = false;
 
-    private OkHttpUtils() {
+    private OkHttpUtils(int connectTimeout, int writeTimeout, int readTimeout) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
+                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.SECONDS)
                 .addInterceptor(new Interceptor() {
                     @Override
                     public Response intercept(Chain chain) throws IOException {
@@ -46,14 +46,19 @@ public class OkHttpUtils {
                     }
                 });
 
-        sOkHttpClient = builder.build();
+        okHttpClient = builder.build();
+    }
+
+
+    public static OkHttpUtils getInstance(int connectTimeout, int writeTimeout, int readTimeout) {
+        return new OkHttpUtils(connectTimeout, writeTimeout, readTimeout);
     }
 
     public static OkHttpUtils getInstance() {
-        if (netUtil == null) {
-            netUtil = new OkHttpUtils();
+        if (okHttpUtils == null) {
+            okHttpUtils = new OkHttpUtils(15, 15, 15);
         }
-        return netUtil;
+        return okHttpUtils;
     }
 
     public String syncPostForm(String url) throws IOException {
@@ -88,7 +93,7 @@ public class OkHttpUtils {
                 .url(url)
                 .build();
 
-        Response response = sOkHttpClient.newCall(request).execute();
+        Response response = okHttpClient.newCall(request).execute();
         if (!response.isSuccessful())
             throw new IOException("Unexpected code " + response);
         String result = response.body().string();
