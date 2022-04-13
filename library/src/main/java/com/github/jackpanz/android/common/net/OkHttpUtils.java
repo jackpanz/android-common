@@ -10,8 +10,10 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OkHttpUtils {
@@ -59,6 +61,47 @@ public class OkHttpUtils {
             okHttpUtils = new OkHttpUtils(15, 15, 15);
         }
         return okHttpUtils;
+    }
+
+    public String syncPostJson(String url, String json) throws IOException {
+        return syncPostJson(url, json, "application/json;charset=utf-8", null);
+    }
+
+    public String syncPostJson(String url, String json, String mediaType) throws IOException {
+        return syncPostJson(url, json, mediaType, null);
+    }
+
+    public String syncPostJson(String url, String json, Map<String, String> headers) throws IOException {
+        return syncPostJson(url, json, "application/json;charset=utf-8", headers);
+    }
+
+    public String syncPostJson(String url, String json, String mediaType, Map<String, String> headers) throws IOException {
+        Request.Builder builder = new Request.Builder();
+
+        if (headers != null && headers.size() > 0) {
+            Headers.Builder headerBuilder = new Headers.Builder();
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                headerBuilder.add(entry.getKey(), entry.getValue());
+            }
+            builder.headers(headerBuilder.build());
+        }
+
+        MediaType type = MediaType.Companion.parse(mediaType);
+        RequestBody requestBody = RequestBody.Companion.create(json, type);
+
+        Request request = builder
+                .post(requestBody)
+                .url(url)
+                .build();
+
+        Response response = okHttpClient.newCall(request).execute();
+        if (!response.isSuccessful())
+            throw new IOException("Unexpected code " + response);
+        String result = response.body().string();
+        if (debug) {
+            Log.i(TAG, result);
+        }
+        return result;
     }
 
     public String syncPostForm(String url) throws IOException {
